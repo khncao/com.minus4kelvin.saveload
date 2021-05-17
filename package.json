@@ -1,8 +1,8 @@
 {
-  "name": "com.minus4kelvin.serialization",
+  "name": "com.minus4kelvin.saveload",
   "version": "1.0.0",
-  "displayName": "m4k.Serialization",
-  "description": "Serialization system",
+  "displayName": "m4k.SaveLoad",
+  "description": "Game save load system",
   "unity": "2019.1",
   "dependencies": {
     "com.minus4kelvin.core": "1.0.0",

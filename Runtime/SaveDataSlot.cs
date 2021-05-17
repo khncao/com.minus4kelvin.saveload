@@ -2,7 +2,7 @@
 // using System.Collections.Generic;
 using UnityEngine;
 
-namespace m4k.Serialization {
+namespace m4k.SaveLoad {
 // [System.Serializable]
 public class SaveDataSlot : MonoBehaviour {
     public TMPro.TMP_Text slotId;

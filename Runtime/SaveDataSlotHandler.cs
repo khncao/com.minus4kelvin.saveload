@@ -4,7 +4,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace m4k.Serialization {
+namespace m4k.SaveLoad {
 public class SaveDataSlotHandler : MonoBehaviour
 {
     public SaveDataSlot[] slots;

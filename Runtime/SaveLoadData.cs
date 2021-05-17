@@ -1,7 +1,7 @@
 using System.IO;
 using UnityEngine;
 
-namespace m4k.Serialization {
+namespace m4k.SaveLoad {
 public class SaveLoadData<T> : ISaveLoadable where T : GameDataBase 
 {
     float refPlayStartTime;
