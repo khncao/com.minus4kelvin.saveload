@@ -8,10 +8,15 @@ namespace m4k.SaveLoad {
 public class SaveDataSlotHandler : MonoBehaviour
 {
     public SaveDataSlot[] slots;
+#if TMPRO
     public TMPro.TMP_Text slotsLabel;
+#else
+    public Text slotsLabel;
+#endif
     public GameObject confirmOverwritePanel;
-    Action<int> onPressSlot;
-    int overwriteSlotId;
+    
+    Action<int> _onPressSlot;
+    int _overwriteSlotId;
 
     void Awake() {
         InitSlots();
@@ -46,18 +51,18 @@ public class SaveDataSlotHandler : MonoBehaviour
 
     public void OpenSaveSlots() {
         slotsLabel.text = "SAVE GAME";
-        onPressSlot = SaveLoadManager.I.saveLoadable.Save;
+        _onPressSlot = SaveLoadManager.I.saveLoadable.Save;
         gameObject.SetActive(true);
     }
 
     public void OpenLoadSlots() {
         slotsLabel.text = "LOAD GAME";
-        onPressSlot = SaveLoadManager.I.saveLoadable.Load;
+        _onPressSlot = SaveLoadManager.I.saveLoadable.Load;
         gameObject.SetActive(true);
     }
 
     public void ConfirmOverwrite() {
-        onPressSlot(overwriteSlotId);
+        _onPressSlot(_overwriteSlotId);
         confirmOverwritePanel.SetActive(false);
         // gameObject.SetActive(false);
         RefreshSlots();
@@ -68,12 +73,12 @@ public class SaveDataSlotHandler : MonoBehaviour
         if(isSaving) {
             if(slots[id].playTime.text != "") {
                 confirmOverwritePanel.SetActive(true);
-                overwriteSlotId = id;
+                _overwriteSlotId = id;
                 return;
             }
         }
 
-        onPressSlot(id);
+        _onPressSlot(id);
         // gameObject.SetActive(false);
         if(isSaving)
             RefreshSlots();

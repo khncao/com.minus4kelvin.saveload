@@ -1,6 +1,9 @@
-﻿using System.IO;
+﻿// ref unity fpssample
+
+using System.IO;
 using UnityEngine;
 
+namespace m4k.SaveLoad {
 public class GameDataReader {
     BinaryReader reader;
 
@@ -48,4 +51,5 @@ public class GameDataReader {
     public void Dispose(){
         reader.Dispose();
     }
+}
 }

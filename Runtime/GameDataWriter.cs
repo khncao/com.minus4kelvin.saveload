@@ -1,6 +1,9 @@
-﻿using System.IO;
+﻿// ref unity fpssample
+
+using System.IO;
 using UnityEngine;
 
+namespace m4k.SaveLoad {
 public class GameDataWriter {
     BinaryWriter writer;
 
@@ -44,4 +47,5 @@ public class GameDataWriter {
     public void Dispose(){
         writer.Dispose();
     }
+}
 }
