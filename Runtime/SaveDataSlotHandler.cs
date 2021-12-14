@@ -51,13 +51,13 @@ public class SaveDataSlotHandler : MonoBehaviour
 
     public void OpenSaveSlots() {
         slotsLabel.text = "SAVE GAME";
-        _onPressSlot = SaveLoadManager.I.saveLoadable.Save;
+        _onPressSlot = SaveLoadManager.saveLoadable.Save;
         gameObject.SetActive(true);
     }
 
     public void OpenLoadSlots() {
         slotsLabel.text = "LOAD GAME";
-        _onPressSlot = SaveLoadManager.I.saveLoadable.Load;
+        _onPressSlot = SaveLoadManager.saveLoadable.Load;
         gameObject.SetActive(true);
     }
 
