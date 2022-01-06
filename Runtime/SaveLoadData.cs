@@ -2,6 +2,10 @@ using System.IO;
 using UnityEngine;
 
 namespace m4k.SaveLoad {
+/// <summary>
+/// Handles basic game save and load operations with GameDataBase and derivatives
+/// </summary>
+/// <typeparam name="T"></typeparam>
 public class SaveLoadData<T> : ISaveLoadable where T : GameDataBase 
 {
     float refPlayStartTime;
@@ -89,20 +93,6 @@ public class SaveLoadData<T> : ISaveLoadable where T : GameDataBase
         totalPlayTime = data.playTime;
         SceneHandler.I.LoadSceneByName(data.sceneName, true);
         return data;
-    }
-}
-
-[System.Serializable]
-public abstract class GameDataBase {
-    public int version;
-    public string sceneName;
-    public float playTime;
-
-    public virtual void Serialize() {
-
-    }
-    public virtual void Deserialize() {
-        
     }
 }
 }

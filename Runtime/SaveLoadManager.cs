@@ -3,42 +3,32 @@ using System;
 using System.Collections;
 
 /// <summary>
-/// SaveLoadManager is a generic game data serialization base class. Constructed with derivative of GameDataBase. System.Action callbacks on save and load.  Instantiate and call methods through a manager class reference. Save data slots and metadata are stored in PlayerPrefs.
+/// Singleton access to common save/load functions and saveLoadable. Save data slots and metadata are stored in PlayerPrefs.
 /// </summary>
 namespace m4k.SaveLoad {
-public class SaveLoadManager : Singleton<SaveLoadManager> {
+public class SaveLoadManager {
+    // Static survive reload of persistent scene and flag index of scene to load
     public static int loadIndex = -1;
-    public Action onSaveDone, onLoadDone, onQuickSave, onQuickLoad;
-    public ISaveLoadable saveLoadable;
+    public static ISaveLoadable saveLoadable;
 
-    // protected override void Awake() {
-    //     base.Awake();
-    //     if(m_ShuttingDown) return;
-    // }
-    public void Init(ISaveLoadable saveLoadable) {
-        this.saveLoadable = saveLoadable;
+    public Action onSaveDone, onLoadDone, onQuickSave, onQuickLoad;
+
+    public static void Init(ISaveLoadable newSaveLoadable) {
+        saveLoadable = newSaveLoadable;
+        TryLoadScene();
+    }
+
+    public static void TryLoadScene() {
         if(loadIndex >= 0) {
-            StartCoroutine(DelayLoad(loadIndex));
+            saveLoadable.Load(loadIndex);
             loadIndex = -1;
         }
     }
-    IEnumerator DelayLoad(int index) {
-        yield return new WaitForEndOfFrame();
-        saveLoadable.Load(index);
+
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    static void Reset() {
+        loadIndex = -1;
+        saveLoadable = null;
     }
 }
-public interface ISaveLoadable {
-    void Save(int index);
-    void Load(int index);
-    void QuickSave();
-    void QuickLoad();
-    void Continue();
-}
-
-// public interface IStateSerializable
-// {
-//     void Serialize(ref GameDataWriter writer);
-//     void Deserialize(ref GameDataReader reader);
-// }
-
 }

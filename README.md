@@ -2,13 +2,36 @@
 
 ### Dependencies
 - https://github.com/khncao/com.minus4kelvin.core 
-  - Feedback and SceneHandler
-- TextMeshPro
+  - Singleton, Feedback and SceneHandler
+- (optional)TextMeshPro
 - Tested on Unity 2020.3.6f1+
 
 ### Todo
 - Example, prefabs, tests
 - Simple registry based implementation for arbitrary save-loaded monobehaviours
+
+### Usage
+```c#
+public class GameSaveData : GameDataBase {}
+
+public class Example {
+  SaveLoadData<GameSaveData> gameData;
+
+  public void Start() {
+    gameData = new SaveLoadData<GameSaveData>(new GameSaveData());
+    SaveLoadManager.I.Init(gameData);
+  }
+}
+
+public class Example2 {
+  public void Save(int index) {
+    SaveLoadManager.I.saveLoadable.Save(index);
+  }
+  public void Load(int index) {
+    SaveLoadManager.I.saveLoadable.Load(index);
+  }
+}
+```
 
 ### SaveLoadManager
 - Singleton
