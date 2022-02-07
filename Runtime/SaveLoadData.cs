@@ -91,7 +91,7 @@ public class SaveLoadData<T> : ISaveLoadable where T : GameDataBase
         data.Deserialize();
 
         totalPlayTime = data.playTime;
-        SceneHandler.I.LoadSceneByName(data.sceneName, true);
+        SceneHandler.I.LoadSceneByName(data.sceneName, true, true);
         return data;
     }
 }
